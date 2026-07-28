@@ -18,7 +18,7 @@ import '../css/footer.css'
 import HelpPage from "./screens/helpPage";
 import Test from "./screens/Test";
 import useBasket from "./hooks/useBasket";
-import AuthenticationModal from "./components/auth/index";
+import AuthenticationModal from "./components/auth";
 
 
 function App() {
@@ -44,14 +44,20 @@ function App() {
           onAdd={onAdd}
           onRemove={onRemove}
           onDelete={onDelete}
-          onDeleteAll={onDeleteAll} />
+          onDeleteAll={onDeleteAll}
+          setSignupOpen={setSignupOpen}
+          setLoginOpen={setLoginOpen}
+        />
         :
         <OtherNavbar
           cartItems={cartItems}
           onAdd={onAdd}
           onRemove={onRemove}
           onDelete={onDelete}
-          onDeleteAll={onDeleteAll} />}
+          onDeleteAll={onDeleteAll}
+          setSignupOpen={setSignupOpen}
+          setLoginOpen={setLoginOpen}
+        />}
       <Switch>
         <Route path="/products">
           <ProductsPage onAdd={onAdd} />
