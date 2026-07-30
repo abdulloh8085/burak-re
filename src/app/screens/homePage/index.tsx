@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Statistics from "./Statistics";
 import PopularDishes from "./PopularDishes";
 import NewDishes from "./NewDishes";
-import Advertisement from "./Advertisement";
+import Advertisement from "./Advertisements";
 import ActiveUsers from "./ActiveUsers";
 import Events from "./Events"
 //@ts-ignore
@@ -17,7 +17,7 @@ import { ProductCollection } from "../../../lib/enums/product.enum";
 import MemberService from "../../services/MemberService";
 import { Member } from "../../../lib/types/member";
 
-/* REDUX SLICE */
+/** REDUX SLICE*/
 const actionDispatch = (dispatch: Dispatch) => ({
     setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
     setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
@@ -43,7 +43,7 @@ export default function HomePage() {
             .then(
                 (data) => {
                     console.log("data pssed here", data)
-                    setPopularDishes(data)
+                    setPopularDishes(data)  //1
                 }
             )
             .catch((err) => { console.log(err) });

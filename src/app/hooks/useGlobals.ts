@@ -1,6 +1,5 @@
 import { createContext, useContext } from "react";
 import { Member } from "../../lib/types/member";
-import exp from "constants";
 
 
 interface GlobalInterface {
@@ -18,4 +17,3 @@ export const useGlobals = () => {
 
     return context;
 }
-export default useGlobals;

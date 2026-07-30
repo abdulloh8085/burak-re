@@ -25,6 +25,7 @@ class ProductService {
             throw err;
         }
     }
+
     public async getProduct(productId: string): Promise<Product> {
         try {
 
@@ -39,6 +40,7 @@ class ProductService {
             throw err;
         }
     }
+
 }
 
 

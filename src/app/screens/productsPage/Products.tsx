@@ -22,17 +22,31 @@ import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import { protocol } from "socket.io-client";
 import { useHistory } from "react-router-dom";
+import { CartItem } from "../../../lib/types/search";
+
+
+
+
 
 /** REDUX SLICE*/
 const actionDispatch = (dispatch: Dispatch) => ({
   setProducts: (data: Product[]) => dispatch(setProducts(data)),
 })
 
+
+
 /** REDUX SLICE and SELECTOR */
 const productsRetriever = createSelector(retrieveProducts, (products) => ({ products })) //9
 
-export default function Products() {
 
+
+
+interface ProductsProps {
+  onAdd: (item: CartItem) => void
+}
+
+export default function Products(props: ProductsProps) {
+  const { onAdd } = props
   const { setProducts } = actionDispatch(useDispatch());
   const { products } = useSelector(productsRetriever)
 
@@ -56,7 +70,6 @@ export default function Products() {
     const product = new ProductService();
 
     product.getProducts(productSearch)
-
       .then((data) => setProducts(data))
       .catch((err) => console.log(err));
 
@@ -78,6 +91,7 @@ export default function Products() {
     setProductSearch({ ...productSearch })
   }
 
+
   const searchOrderHandler = (order: string) => {
     productSearch.page = 1;
     productSearch.order = order;
@@ -85,10 +99,12 @@ export default function Products() {
     setProductSearch({ ...productSearch })
   }
 
+
   const searchProductHandler = () => {
     productSearch.search = searchText;
     setProductSearch({ ...productSearch });
   }
+
 
   const paginationHandler = (e: ChangeEvent<any>, value: number) => {
     productSearch.page = value;
@@ -136,7 +152,6 @@ export default function Products() {
             <Stack className={"dishes-filter-box"}>
               <Button
                 variant={"contained"}
-
                 className={"order"}
                 color={productSearch.order === "createdAt" ? "primary" : "secondary"}
                 onClick={() => { searchOrderHandler("createdAt") }}
@@ -145,7 +160,6 @@ export default function Products() {
               </Button>
               <Button
                 variant={"contained"}
-
                 className={"order"}
                 color={productSearch.order === "productPrice" ? "primary" : "secondary"}
                 onClick={() => { searchOrderHandler("productPrice") }}
@@ -154,7 +168,6 @@ export default function Products() {
               </Button>
               <Button
                 variant={"contained"}
-
                 className={"order"}
                 color={productSearch.order === "productViews" ? "primary" : "secondary"}
                 onClick={() => { searchOrderHandler("productViews") }}
@@ -200,7 +213,18 @@ export default function Products() {
                         sx={{ backgroundImage: `url(${imagePath})` }}
                       >
                         <div className={"product-sale"}>{sizeVolume}</div>
-                        <Button className={"shop-btn"}>
+                        <Button className={"shop-btn"}
+                          onClick={(e) => {
+                            onAdd({
+                              _id: product._id,
+                              quantity: 1,
+                              name: product.productName,
+                              price: product.productPrice,
+                              image: product.productImages[0]
+                            })
+                            e.stopPropagation();
+                          }}
+                        >
                           <img
                             src={"/icons/shopping-cart.svg"}
                             style={{ display: "flex" }}

@@ -11,7 +11,7 @@ const useBasket = () => {
 
     const onAdd = (input: CartItem) => {
         const exist: any = cartItems.find((item: CartItem) => {
-            return item._id === input._id                           
+            return item._id === input._id                            // cartItems bizda mavjud savat b-b items mavjud ichidagiu productrlar input kirgizmoqachi bolgan product
         });
 
         if (exist) {
@@ -23,7 +23,7 @@ const useBasket = () => {
             localStorage.setItem("cartData", JSON.stringify(cartUpdate));
 
         } else {
-            const cartUpdate = [...cartItems, { ...input }];   
+            const cartUpdate = [...cartItems, { ...input }];   // agar osha product savatchada bolmasa qoshmoqchi bolgan osha productni savatga qoshib yangi array beradi 
             setCartItems(cartUpdate);
 
             localStorage.setItem("cartData", JSON.stringify(cartUpdate));
@@ -32,7 +32,7 @@ const useBasket = () => {
 
     const onRemove = (input: CartItem) => {
         const exist: any = cartItems.find((item: CartItem) => {
-            return item._id === input._id                           
+            return item._id === input._id                            // cartItems bizda mavjud savat b-b items mavjud ichidagiu productrlar input kirgizmoqachi bolgan product
         });
 
         if (exist.quantity === 1) {
@@ -51,6 +51,7 @@ const useBasket = () => {
         }
     }
 
+
     const onDelete = (input: CartItem) => {
         const cartUpdate = cartItems.filter((item: CartItem) => {
             return item._id !== input._id
@@ -60,10 +61,13 @@ const useBasket = () => {
         localStorage.setItem("cartData", JSON.stringify(cartUpdate));
     }
 
+
+
     const onDeleteAll = () => {
         setCartItems([]);
         localStorage.removeItem("cartData")
     }
+
 
     return {
         cartItems,
@@ -73,4 +77,5 @@ const useBasket = () => {
         onDeleteAll
     }
 }
+
 export default useBasket;

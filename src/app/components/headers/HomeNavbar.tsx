@@ -28,7 +28,6 @@ interface HomeNavbarProps {
 export default function HomeNavbar(props: HomeNavbarProps) {
     const { cartItems, onAdd, onRemove, onDelete, onDeleteAll, setLoginOpen, setSignupOpen, handleLogoutClick, anchorEl, handleCloseLogout, handleLogoutRequest } = props
 
-
     const { authMember } = useGlobals()
 
     return (

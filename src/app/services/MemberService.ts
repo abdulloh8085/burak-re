@@ -80,4 +80,5 @@ class MemberService {
 
 }
 
-export default MemberService;
+export default MemberService
+
