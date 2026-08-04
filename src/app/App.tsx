@@ -25,12 +25,12 @@ import { Messages } from "../lib/config";
 import MemberService from "./services/MemberService";
 import { useGlobals } from "./hooks/useGlobals";
 
-
 function App() {
   const location = useLocation();
-  const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket()
+
   const [signupOpen, setSignupOpen] = useState<boolean>(false)
   const [loginOpen, setLoginOpen] = useState<boolean>(false)
+
   const { setAuthMember } = useGlobals();
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
@@ -63,19 +63,15 @@ function App() {
       sweetErrorHandling(Messages.error1)
     }
   }
-
-
-
-
   return (
     <>
       {location.pathname === "/" ?
         <HomeNavbar
-          cartItems={cartItems}
-          onAdd={onAdd}
-          onRemove={onRemove}
-          onDelete={onDelete}
-          onDeleteAll={onDeleteAll}
+          // cartItems={cartItems}
+          // onAdd={onAdd}
+          // onRemove={onRemove}
+          // onDelete={onDelete}
+          // onDeleteAll={onDeleteAll}
           setSignupOpen={setSignupOpen}
           setLoginOpen={setLoginOpen}
           anchorEl={anchorEl}
@@ -85,11 +81,11 @@ function App() {
         />
         :
         <OtherNavbar
-          cartItems={cartItems}
-          onAdd={onAdd}
-          onRemove={onRemove}
-          onDelete={onDelete}
-          onDeleteAll={onDeleteAll}
+          // cartItems={cartItems}
+          // onAdd={onAdd}
+          // onRemove={onRemove}
+          // onDelete={onDelete}
+          // onDeleteAll={onDeleteAll}
           setSignupOpen={setSignupOpen}
           setLoginOpen={setLoginOpen}
           anchorEl={anchorEl}
@@ -99,7 +95,7 @@ function App() {
         />}
       <Switch>
         <Route path="/products">
-          <ProductsPage onAdd={onAdd} />
+          <ProductsPage />
         </Route>
         <Route path="/orders">
           <OrdersPage />
