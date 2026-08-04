@@ -31,7 +31,7 @@ import ProductService from "../../services/ProductService";
 import MemberService from "../../services/MemberService";
 import { Member } from "../../../lib/types/member";
 import { CartItem } from "../../../lib/types/search";
-import useBasket from "../../hooks/useBasket";
+import { useGlobals } from "../../hooks/useGlobals";
 
 /** REDUX SLICE*/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -44,7 +44,7 @@ const restaurantRetriever = createSelector(retrieveRestaurant, (restaurant) => (
 const chosenProductRetriever = createSelector(retrieveChosenProduct, (chosenProduct) => ({ chosenProduct })) //9
 
 export default function ChosenProduct() {
-  const { onAdd } = useBasket();
+const { basket } = useGlobals();
   const { productId } = useParams<{ productId: string }>();
   const { setRestaurant, setChosenProduct } = actionDispatch(useDispatch());
 
@@ -115,7 +115,7 @@ export default function ChosenProduct() {
             <div className={"button-box"}>
               <Button variant="contained"
                 onClick={(e) => {
-                  onAdd({
+                  basket.onAdd({
                     _id: chosenProduct._id,
                     quantity: 1,
                     name: chosenProduct.productName,
